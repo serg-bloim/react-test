@@ -5,9 +5,9 @@ import OrderEditor from "./OrderEditor";
 import { defaultTo } from 'lodash-es'
 class OrdersUI extends React.Component {
   // state={selected:{}};
-  constructor(props){
-super(props);
-this.state={selected:{id:5}};
+  constructor(props) {
+    super(props);
+    this.state = { selected: { id: 5 } };
   }
   clickHandler(e, order) {
     this.setState({ selected: order });
@@ -15,7 +15,7 @@ this.state={selected:{id:5}};
     console.log("click");
   }
 
-  render = ()=> {
+  render = () => {
     return (
       <div>
         <Grid container>
@@ -34,14 +34,9 @@ this.state={selected:{id:5}};
                 })
               }
             </List>
-            {/* {this.state.selected.id} */}
           </Grid>
           <Grid item xs={6}>
-          {/* {this.state.selected.id} */}
-          <OrderEditor
-            order={this.state.selected}
-            />
-            {this.state.selected.id}
+            <OrderEditor order={this.state.selected} />
           </Grid>
         </Grid>
       </div>

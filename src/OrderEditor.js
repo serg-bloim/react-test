@@ -2,12 +2,7 @@ import React from "react";
 import { Grid, TextField, Button } from "@material-ui/core";
 
 class OrderEditor extends React.Component{
-    constructor(props){
-        super(props);
-        console.log("editor created");
-        console.log(props.order);
-    }
-    render(){
+   render(){
         return(
             <Grid container spacing={24}>
               <Grid item xs={12}>
@@ -16,7 +11,7 @@ class OrderEditor extends React.Component{
                   label="ID"
                   style={{ margin: 8 }}
                   margin="normal"
-                  defaultValue={this.props.order.id}
+                  value={this.props.order.id}
                   fullWidth
                   InputProps={{
                     readOnly: true,
@@ -28,7 +23,8 @@ class OrderEditor extends React.Component{
                   id="url"
                   label="Endpoint"
                   style={{ margin: 8 }}
-                  placeholder="http://"
+                  // placeholder="http://"
+                  value={this.props.order.url}
                   fullWidth
                   margin="normal"
                   InputLabelProps={{
@@ -43,6 +39,7 @@ class OrderEditor extends React.Component{
                   style={{ margin: 8 }}
                   type="number"
                   // style={{ width: 100 }}
+                  value={this.props.order.cnt}
                   fullWidth
                   margin="normal"
                   InputLabelProps={{
