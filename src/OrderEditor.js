@@ -1,9 +1,28 @@
 import React from "react";
 import { Grid, TextField, Button } from "@material-ui/core";
+import { defaultTo } from 'lodash-es';
 
 class OrderEditor extends React.Component{
+  constructor(ps){
+    super(ps);
+    this.state={};
+    this.handleChange.bind(this);
+  }
+  handleChange(event, propName) {
+    var ord = Object.assign({}, this.props.order, {[propName]:event.target.value})
+    this.props.onChange(ord);
+  }
    render(){
         return(
+          <div>
+          <TextField
+          id="uuid2"
+                  label="ID2"
+                  style={{ margin: 8 }}
+                  margin="normal"
+                  value={this.props.order.id}
+                  fullWidth
+          />
             <Grid container spacing={24}>
               <Grid item xs={12}>
                 <TextField
@@ -12,9 +31,10 @@ class OrderEditor extends React.Component{
                   style={{ margin: 8 }}
                   margin="normal"
                   value={this.props.order.id}
+                  onChange={e=>{this.setState({order: {id:e.target.value}});}}
                   fullWidth
                   InputProps={{
-                    readOnly: true,
+                    // readOnly: true,
                   }}
                 />
                 </Grid>
@@ -26,6 +46,7 @@ class OrderEditor extends React.Component{
                   // placeholder="http://"
                   value={this.props.order.url}
                   fullWidth
+                  onChange={e=>this.handleChange(e, "url")}
                   margin="normal"
                   InputLabelProps={{
                     shrink: true,
@@ -36,11 +57,13 @@ class OrderEditor extends React.Component{
                 <TextField
                   id="amount"
                   label="Amount"
+                  propName="cnt"
                   style={{ margin: 8 }}
                   type="number"
                   // style={{ width: 100 }}
                   value={this.props.order.cnt}
                   fullWidth
+                  onChange={e=>this.handleChange(e, "cnt")}
                   margin="normal"
                   InputLabelProps={{
                     shrink: true,
@@ -53,13 +76,14 @@ class OrderEditor extends React.Component{
                 <Button
                       variant="contained"
                       color="primary"
-                      // onClick={this.handleNext}
+                      onClick={this.props.onUpdate}
                       // className={classes.button}
                       >
                       {'Update'}
                     </Button>
               </Grid>
             </Grid>
+            </div>
         )
     }
 }
