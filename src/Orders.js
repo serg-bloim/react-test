@@ -67,7 +67,7 @@ class OrdersUI extends React.Component {
                       key={ord.id}
                       selected={this.state.selected.id === ord.id}
                       onClick={e => this.clickHandler(e, ord)}>
-                      <ListItemText primary={ord.id} />
+                      <ListItemText primary={ord.id} secondary={ord.cnt + " x " + ord.url} />
                     </ListItem>
                   )
                 })
