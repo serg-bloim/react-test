@@ -45,7 +45,10 @@ class OrdersUI extends React.Component {
       }),
     }).then(r => {
       this.updateOrders();
-    })
+      return r.json();
+    }).then(ord=>{
+      this.setState({selected: ord});
+    });
   }
   handleCreateNew = () => {
     this.setState(
@@ -75,12 +78,6 @@ class OrdersUI extends React.Component {
             </List>
           </Grid>
           <Grid item xs={6}>
-          <Button
-          variant="contained"
-          color="primary"
-          className="update-button"
-          onClick={this.handleCreateNew}
-          >Create New</Button>
             <OrderEditor order={this.state.selected}
             isNew={this.state.selected.isNew}
             onChange={this.handleEditorChange}
