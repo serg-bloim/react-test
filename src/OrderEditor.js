@@ -14,15 +14,6 @@ class OrderEditor extends React.Component{
   }
    render(){
         return(
-          <div>
-          <TextField
-          id="uuid2"
-                  label="ID2"
-                  style={{ margin: 8 }}
-                  margin="normal"
-                  value={this.props.order.id}
-                  fullWidth
-          />
             <Grid container spacing={24}>
               <Grid item xs={12}>
                 <TextField
@@ -83,7 +74,6 @@ class OrderEditor extends React.Component{
                     </Button>
               </Grid>
             </Grid>
-            </div>
         )
     }
 }

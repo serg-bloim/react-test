@@ -4,11 +4,12 @@ import { ListItem } from '@material-ui/core';
 import OrderEditor from "./OrderEditor";
 import { defaultTo } from 'lodash-es'
 class OrdersUI extends React.Component {
-  // state={selected:{}};
   constructor(props) {
     super(props);
     this.state = { 
-      selected: { id: 5 },
+      selected: { id: '',
+       url:'',
+       cnt:0 },
       orders: []
     };
     this.updateOrders();

@@ -10,7 +10,6 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 var orders = require("./orders").orders
 // create a GET route
 app.get('/orders', (req, res) => {
-    console.log(orders);
     res.send(orders);
   });
 app.put('/orders/:orderId', (req,res)=>{
