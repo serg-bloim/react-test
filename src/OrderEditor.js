@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid, TextField, Button } from "@material-ui/core";
 import { defaultTo } from 'lodash-es';
+import './orders.css'
 
 class OrderEditor extends React.Component{
   constructor(ps){
@@ -68,9 +69,9 @@ class OrderEditor extends React.Component{
                       variant="contained"
                       color="primary"
                       onClick={this.props.onUpdate}
-                      // className={classes.button}
+                      className={this.props.isNew ? "create-button":"update-button"}
                       >
-                      {'Update'}
+                      {this.props.isNew ? 'Create' : 'Update'}
                     </Button>
               </Grid>
             </Grid>

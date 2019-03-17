@@ -1,8 +1,9 @@
 import React from "react";
-import { List, ListItemText, Grid, TextField, Button } from '@material-ui/core';
+import { List, ListItemText, Grid, TextField, Button, withStyles } from '@material-ui/core';
 import { ListItem } from '@material-ui/core';
 import OrderEditor from "./OrderEditor";
 import { defaultTo } from 'lodash-es'
+
 class OrdersUI extends React.Component {
   constructor(props) {
     super(props);
@@ -34,21 +35,24 @@ class OrdersUI extends React.Component {
 
   handleEditorUpdate = () => {
     var ord = this.state.selected;
-    fetch('/orders/'+ord.id,{
-      method:'PUT',
+    var method = ord.isNew?'POST':'PUT';
+    var url = ord.isNew?'/orders':'/orders/'+ord.id;
+    fetch(url,{
+      method:method,
       body:JSON.stringify(ord),
       headers: new Headers({
         'Content-Type': 'application/json'
       }),
     }).then(r => {
-      if (r.ok) {
-        alert('Updated');
-      }
-      else {
-        alert('Failed to update');
-      }
       this.updateOrders();
     })
+  }
+  handleCreateNew = () => {
+    this.setState(
+      {
+        selected: Object.assign({},this.state.selected,{ isNew: true, id:''})
+      }
+    );
   }
   render = () => {
     return (
@@ -71,7 +75,14 @@ class OrdersUI extends React.Component {
             </List>
           </Grid>
           <Grid item xs={6}>
+          <Button
+          variant="contained"
+          color="primary"
+          className="update-button"
+          onClick={this.handleCreateNew}
+          >Create New</Button>
             <OrderEditor order={this.state.selected}
+            isNew={this.state.selected.isNew}
             onChange={this.handleEditorChange}
             onUpdate={this.handleEditorUpdate}
             />
@@ -81,5 +92,4 @@ class OrdersUI extends React.Component {
     );
   }
 }
-
 export default OrdersUI;

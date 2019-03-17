@@ -1,5 +1,6 @@
 const express = require('express');
 const _ = require('lodash');
+const uuidv1 = require('uuid/v1');
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -12,12 +13,20 @@ var orders = require("./orders").orders
 app.get('/orders', (req, res) => {
     res.send(orders);
   });
-app.put('/orders/:orderId', (req,res)=>{
-    var id = req.params['orderId'];
-    var ind = _.findIndex(orders, (ord)=>ord.id === id)
-    if(ind >= 0){
-        orders[ind] = req.body;
-    }
-    orders[id] = req.body;
-    res.send(req.body);
-});
+  app.put('/orders/:orderId', (req,res)=>{
+      var id = req.params['orderId'];
+      var ind = _.findIndex(orders, (ord)=>ord.id === id)
+      if(ind >= 0){
+          orders[ind] = req.body;
+      }
+      orders[id] = req.body;
+      res.send(req.body);
+  });
+  app.post('/orders', (req,res)=>{
+      var id = uuidv1()
+      var ord = _.pick(Object.assign({},req.body, {id:id}), ['id', 'url','cnt']);
+      orders.push(ord);
+      console.log('Creating');
+      console.log(ord);
+      res.send(ord);
+  });
