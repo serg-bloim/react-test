@@ -91,7 +91,7 @@ class OrderEditor extends React.Component {
             variant="contained"
             color="secondary"
             // className="update-button"
-            onClick={this.handleCreateNew}
+            onClick={this.props.onDelete}
           >Delete</Button>
         </Grid>
       </Grid>

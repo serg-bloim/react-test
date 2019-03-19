@@ -22,6 +22,11 @@ app.get('/orders', (req, res) => {
       orders[id] = req.body;
       res.send(req.body);
   });
+  app.delete('/orders/:orderId', (req,res)=>{
+      var id = req.params['orderId'];
+      _.remove(orders, o=>o.id===id);
+      res.send()
+  });
   app.post('/orders', (req,res)=>{
       var id = uuidv1()
       var ord = _.pick(Object.assign({},req.body, {id:id}), ['id', 'url','cnt']);
